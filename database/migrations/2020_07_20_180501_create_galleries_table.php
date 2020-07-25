@@ -14,7 +14,7 @@ class CreateGalleriesTable extends Migration
     public function up()
     {
         Schema::create('galleries', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement;
+            $table->integer('id')->autoIncrement();
             $table->string('path');
             $table->integer('t_id');
             $table->foreign('t_id')->references('id')->on('tours');

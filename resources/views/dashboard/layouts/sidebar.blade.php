@@ -26,23 +26,36 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class=""><a href="{{ route('dashboard.users.create')}}"><i class="fa fa-user-plus"></i>ADD USER</a></li>
-                    <li class=""><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-list"></i>ALL USERS</a></li>
+                    <li class=""><a href="{{ url('dashboard/users/create ')}}"><i class="fa fa-user-plus"></i>ADD USER</a></li>
+                    <li class=""><a href="{{ url('dashboard/users') }}"><i class="fa fa-list"></i>ALL USERS</a></li>
                 </ul>
             </li>
         
 
       
-            {{-- <li class="treeview">
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashcube"></i> <span>{{ __('message.CATEGORIES') }}</span>
+                    <i class="fa fa-dashcube"></i> <span>TOURS</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class=""><a href="#"><i class="fa fa-plus"></i>{{ __('message.ADD_CATEGORY') }}</a></li>
-                    <li class=""><a href="#"><i class="fa fa-list"></i> {{ __('message.LIST') }}</a></li>
+                    <li class=""><a href="{{ url('dashboard/tours/create ')}}"><i class="fa fa-plus"></i>ADD TOURS</a></li>
+                    <li class=""><a href="{{ url('dashboard/tours') }}"><i class="fa fa-list"></i> LIST</a></li>
+                </ul>
+            </li>
+{{-- 
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashcube"></i> <span>Gallaries</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="{{ url('dashboard/tours/create ')}}"><i class="fa fa-plus"></i>ADD TOURS</a></li>
+                    <li class=""><a href="{{ url('dashboard/gallaries') }}"><i class="fa fa-list"></i> LIST</a></li>
                 </ul>
             </li> --}}
            

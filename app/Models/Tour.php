@@ -19,6 +19,14 @@ class Tour extends Model
         
     ];
 
+    public function images(){
+        return $this->hasMany(Gallery::class,'t_id');
+    }
+
+    public function programs(){
+        return $this->hasMany(Program::class,'t_id');
+    }    
+
     public function customers(){
         return $this->belongsToMany(Customer::class, 'customer_tours');
     }
