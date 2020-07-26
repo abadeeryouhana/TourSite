@@ -26,8 +26,8 @@ Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
     Route::delete('program/delete/{id}','ToursController@deleteProgram')->name('dashboard/program.delete');
 
 
-    Route::resource('gallaries','GallariesController')->except(['show','delete']);
-    Route::delete('gallaries/delete/{id}','GallariesController@delete')->name('dashboard/gallaries.delete');
+    Route::resource('customers','CustomersController')->except(['show','delete']);
+    Route::delete('customers/delete/{id}','CustomersController@delete')->name('dashboard/customers.delete');
 
     
 });

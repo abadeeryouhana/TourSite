@@ -14,15 +14,12 @@ class UsersController extends Controller
         $data['title'] = "USERS";
         if(request()->ajax()){
             return datatables()->of(User::select([
-                'id','name','phone','username','password','authorization','created_at'
+                'id','name','phone','username','password','authorization',
                ])
             )
-            ->editColumn('created_at', function($created_at){
-                return date(Config::get('constants.DATE_FORMAT'), strtotime($created_at['created_at']));
-            })
+            
             ->addIndexColumn()
             ->addColumn('action','dashboard.datatable.user-action')
-            ->addColumn('status', 'datatable.status')
             ->rawColumns(['status', 'action'])
             ->make(true);
         }

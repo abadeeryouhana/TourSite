@@ -54,7 +54,7 @@
 
               
 
-              <div id="show-div">
+              {{-- <div id="show-div"> --}}
                 <div class="row">
                     <div class="form-group col-md-6 ">
                         @php $input = 'username'; @endphp
@@ -70,7 +70,7 @@
                   <div class="form-group col-md-6 ">
                     @php $input = 'password'; @endphp
                     <label for="exampleInputEmail1">PASSWORD <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" placeholder="ENTER PASSWORD" value="{{ isset($row) ? $row->{$input} : '' }}" name="{{$input}}" required>
+                    <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" placeholder="ENTER PASSWORD" value="{{ (!empty($result->password))?($result->password):('') }}" name="{{$input}}" required>
                     @if ($errors->has($input))
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $errors->first($input) }}</strong>
@@ -81,13 +81,19 @@
                   <div class="form-group col-md-6 ">
                     @php $input = 'authorization'; @endphp
                     <label for="exampleInputEmail1">SELECT USER TYPE <span class="text-danger">*</span></label>
-  
-                    <select name="{{ $input }}" class="form-control{{ $errors->has($input) ? ' is-invalid' : '' }}" >
-                      <option value="">SELECT USER TYPE</option>
-                      <option value="0" {{ isset($row) && $row[$input] == '0' ? 'selected' : ''}}>Admin</option>
-                      <option value="1" {{ isset($row) && $row[$input] == '1' ? 'selected' : ''}}>User</option>
-                      {{-- <option>ADMIN</option>
-                      <option>USER</option> --}}
+                    @php $id = $result->authorization; @endphp
+                   
+                    <select name="{{ $input }}" class="form-control{{ $errors->has($input) ? ' is-invalid' : '' }}">
+                      @if(empty($id))
+                      {{-- @php dd('asd'); @endphp --}}
+                        <option  value="0" {{ isset($row) && $row[$input] == '0' ? 'selected' : ''}}>ADMIN</option>
+                        <option  value="1" {{ isset($row) && $row[$input] == '1' ? 'selected' : ''}}>USER</option>
+                      @else
+                        <option  value="">SELECT USER TYPE</option>
+                      @endif
+                        <option value="0" {{ isset($row) && $row[$input] == '0' ? 'selected' : ''}}>Admin</option>
+                        <option value="1" {{ isset($row) && $row[$input] == '1' ? 'selected' : ''}}>User</option>
+                     
                     </select>
                     @if ($errors->has($input))
                         <span class="invalid-feedback" role="alert">
@@ -97,13 +103,15 @@
                   </div>
                   
                 </div>
-              </div>
+              {{-- </div> --}}
             </div>
             
-            <div class="form-group row">
-                <div class=" col-md-6">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+            <div class="box-body col-md-12 ">
+              <div class="form-group row">
+                  <div class=" col-md-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </div>
             </div>
         </div>
     </form>

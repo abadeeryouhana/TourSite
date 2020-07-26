@@ -17,16 +17,17 @@
                     </div>
 
                     <div class="box-body table-responsive">
-                        <table id="user_table" class="table table-bordered table-hover">
+                        <table id="customer_table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>ID</th>
                                     <th>NAME</th>
                                     <th>PHONE</th>
-                                    <th>USER NAME</th>
-                                
-                                    <th>USER TYPE</th>
+                                    <th>COUNTRY</th>
+                                    <th>CITY</th>
+                                    <th>STREET</th>
+                                    <th>E-MAIL</th>
                                     <th class="">ACTION</th>
                                 </tr>
                             </thead>
@@ -61,8 +62,8 @@
 
         //$(window).bind("load", function() {
 
-            if ($('#user_table').length > 0) {
-            var tableData = $('#user_table').DataTable({
+            if ($('#customer_table').length > 0) {
+            var tableData = $('#customer_table').DataTable({
                     //stateSave: true,
 
                     processing: true,
@@ -86,7 +87,7 @@
                     lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                     dom: 'lBfrtip',
                     ajax: {
-                        url: "{{ route('users.index') }}",
+                        url: "{{ route('customers.index') }}",
                         type: 'GET',
                         data: function (d) {
                         }
@@ -104,7 +105,7 @@
                         });
                         $('body').off('click', '[id^="changeStatus-"]').on('click', '[id^="changeStatus-"]', function (e) {
                             var self = $(this);
-                            var tbl = "<?php echo 'users' ?>";
+                            var tbl = "<?php echo 'customers' ?>";
                             var id = $(this).attr('id').split('-')[1];
                             var status = $(this).attr('id').split('-')[2];
                             // var language = "<?php echo Session::get('lang') ?>";
@@ -152,16 +153,11 @@
                         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                         {data: 'name', name: 'name'},
                         {data: 'phone', name: 'phone'},
-                        {data: 'username', name: 'username'},                    
-                        {data: 'authorization',
-                        render: function(data){
-                            if(data == '0'){
-                                return 'ADMIN';
-                            }
-                            else{
-                                return 'USER';
-                            }
-                        }},
+                        {data: 'country', name: 'country'},                    
+                        {data: 'city', name: 'city'},                    
+                        {data: 'street', name: 'street'},                    
+                        {data: 'email', name: 'email'},                    
+                        
                         {data: 'action', name: 'action', orderable: false},
                     ],
                     order: [[0, 'desc']]
