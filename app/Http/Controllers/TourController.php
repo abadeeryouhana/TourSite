@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Tour;
+use DateInterval;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class TourController extends Controller
 {
@@ -15,9 +20,10 @@ class TourController extends Controller
      */
     public function index()
     {
-        $tour=Tour::with('images','programs')->get();
-        //dd($tour);
-        return view('index')->with('tours',$tour);
+        $tour = Tour::with('images', 'programs')->get();
+        $city=Tour::select('city')->distinct('city')->get();
+        //dd($city);
+        return view('index')->with('tours', $tour)->with('city',$city);
 
     }
 
@@ -34,7 +40,7 @@ class TourController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,19 +51,21 @@ class TourController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $tour=Tour::with('images','programs')->find($id);
-        return view('tourDetails')->with('tour',$tour);
+        $tour = Tour::with('images', 'programs')->find($id);
+        $city=Tour::select('city')->distinct('city')->get();
+
+        return view('tourDetails')->with('tour', $tour)->with('city',$city);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -68,8 +76,8 @@ class TourController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -80,11 +88,102 @@ class TourController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
+    public function search(Request $request) //Search for tours
+    {
+
+        $tour= new Tour;
+        if(!empty($request->city))
+        {
+            $tour= $tour->where(  'city','like','%'.$request->city.'%');
+        }
+
+         if(!empty($request->check_in) && !empty($request->check_out))
+        {
+            $to=$request->check_out;
+            $from= $request->check_in;
+
+            $from = new DateTime($from);
+            $to = new DateTime($to);
+
+
+            if($from <= $to)
+            {
+                $to->add(new DateInterval('P1D'));
+                $tour= $tour->whereBetween('startDate', [$from,$to]);
+
+            }
+
+            else
+            {
+                $from->add(new DateInterval('P1D'));
+                $tour= $tour->whereBetween('startDate', [$to,$from]);
+            }
+
+
+
+
+        }
+
+        if(!empty($request->duration1) && !empty($request->duration2) )
+        {
+            if($request->duration1 <= $request->duration2)
+            {
+                $tour= $tour->whereBetween('duration',[$request->duration1,$request->duration2]);
+            }
+            else
+            {
+                $tour= $tour->whereBetween('duration',[$request->duration2,$request->duration1]);
+            }
+
+        }
+
+        if(!empty($request->cost1) && !empty($request->cost2))
+        {
+            if($request->cost1 <= $request->cost2)
+            {
+                $tour= $tour ->whereBetween('cost',[$request->cost1,$request->cost2]);
+            }
+            else
+            {
+                $tour= $tour ->whereBetween('cost',[$request->cost2,$request->cost1]);
+            }
+        }
+        $tour=$tour->get();
+
+        $city=Tour::select('city')->distinct('city')->get();
+
+
+          return view('search')->with('tours',$tour)->with('city',$city);
+    }
+
+    public function cancel(Request $request) // Booking Cancel
+    {
+        // minus 1 from counter of tour //
+        $tourId = DB::table('customer_tours')->where('code', $request->code)->get();
+
+
+        //No validattion
+
+
+            $tour = Tour::find($tourId[0]->t_id);
+
+            $tour->numberofRegisters = $tour->numberofRegisters - 1;
+            $tour->save();
+            // delete this row of booking from Customer_tours table //
+             $code=DB::table('customer_tours')->where('code',$request->code)->delete();
+
+
+            return \redirect()->back()->with('message', 'تم الغاء الحجز بنجاح');
+
+
+    }
+
 }

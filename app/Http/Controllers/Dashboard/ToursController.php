@@ -74,17 +74,6 @@ class ToursController extends Controller
         ]);
 
         if (!empty($id)) {
-        //     DB::table('permission')
-        //     ->where('per_id',$req->perid[$i])
-        //     ->update([
-        //         'per_roleid' => $req->roleid[$i],
-        //         'per_pageid' => $req->pageid[$i],
-        //         'view' => $req->view[$i],
-        //         'add' => $req->add[$i],
-        //         'edit' => $req->edit[$i],
-        //         'delete' => $req->delete[$i],
- 
-        // ]);
             Tour::where(array('id' => $id))->update($data);
             Program::where(array('t_id' => $id))->update($program_array);
             

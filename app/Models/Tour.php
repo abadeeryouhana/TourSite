@@ -14,7 +14,8 @@ class Tour extends Model
         'duration',
         'cost',
         'transportationType',
-        'notes'
+        'notes',
+        'numberofRegisters'
 
         
     ];

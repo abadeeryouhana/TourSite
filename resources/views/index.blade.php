@@ -8,10 +8,10 @@
 				<div class="about-us-content">
 					<div class="row">
 						<div class="col-sm-12">
-							<div class="single-about-us">
-								<div class="about-us-txt">
+							<div class="single-about-us text-center" >
+								<div class="about-us-txt col-md-12">
 									<h2>
-										Explore the Beauty of the Beautiful World 
+										اقضى وقتا ممتعا مع اقوى العروض السياحية لدينا 
 
 									</h2>
 									<div class="about-btn">
@@ -34,16 +34,171 @@
 		</section><!--/.about-us-->
 		<!--about-us end -->
 
-		<!--travel-box start-->
-		<section  class="travel-box">
-        	<div class="container">
-        		
-        	</div><!--/.container-->
+        <!--travel-box start-->
+        <section  class="travel-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-travel-boxes">
+                            <div id="desc-tabs" class="desc-tabs">
 
-        </section><!--/.travel-box-->
-		<!--travel-box end-->
+                                <!-- Tab panes -->
+                                <div class="tab-content">
 
-        <!--service start-->
+                                    <div role="tabpanel" class="tab-pane active fade in" id="tours">
+                                        <div class="tab-para">
+                                            <form method="post" action="/search"> <!-- Start Form tag-->
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-12 ">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>البحث بالمدينة</h2>
+                                                            <h2>المدينة</h2>
+
+                                                            <div class="travel-select-icon">
+
+                                                                <select class="form-control " name="city" placeholder="الي اين تريد الذهاب">
+
+                                                                    <option value={{false}}>الي اين تريد الذهاب</option><!-- /.option-->
+																	@foreach($city as $c)
+
+                                                                    <option value="{{$c->city}}" >{{$c->city}}</option><!-- /.option-->
+
+                                                                   @endforeach
+
+                                                                </select><!-- /.select-->
+                                                            </div><!-- /.travel-select-icon -->
+
+
+
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-lg-2 col-md-3 col-sm-4  text-center">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>البحث بالتاريخ</h2>
+                                                            <h2>من </h2>
+                                                            <div class="travel-check-icon">
+                                                                <input type="text" name="check_in" class="form-control" data-toggle="datepicker"  placeholder="12 -01 - 2017 ">
+                                                                <!--<form action="#">
+                                                                    <input type="text" name="check_in" class="form-control" data-toggle="datepicker" placeholder="12 -01 - 2017 ">
+                                                                </form>-->
+                                                            </div><!-- /.travel-check-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+                                                        <div class="single-tab-select-box">
+
+                                                            <h2>الى </h2>
+                                                            <div class="travel-check-icon">
+                                                                <input type="text" name="check_out" class="form-control" data-toggle="datepicker"  placeholder="12 -01 - 2017 ">
+                                                                <!--  <form action="#">
+                                                                      <input type="text" name="check_in" class="form-control" data-toggle="datepicker" placeholder="12 -01 - 2017 ">
+                                                                  </form>-->
+                                                            </div><!-- /.travel-check-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-lg-2 col-md-1 col-sm-4  text-center">
+                                                        <div class="single-tab-select-box">
+                                                            <h2>البحث بالمدة</h2>
+                                                            <h2>من </h2>
+                                                            <div class="travel-select-icon">
+                                                                <select class="form-control " name="duration1">
+																	<option value={{false}} >اختار المدة</option>
+                                                                    <option value="5" >5</option><!-- /.option-->
+
+                                                                    <option value="10" >10</option><!-- /.option-->
+
+                                                                    <option value="15" >15</option><!-- /.option-->
+                                                                    <option value="20" >20</option><!-- /.option-->
+
+                                                                </select><!-- /.select-->
+                                                            </div><!-- /.travel-select-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+                                                        <div class="single-tab-select-box">
+                                                            <h2>الي</h2>
+                                                            <div class="travel-select-icon">
+                                                                <select class="form-control " name="duration2">
+																	<option value={{false}} >اختار المدة</option>
+                                                                    <option value="5" >5</option><!-- /.option-->
+
+                                                                    <option value="10" >10</option><!-- /.option-->
+
+                                                                    <option value="15" >15</option><!-- /.option-->
+                                                                    <option value="20" >20</option><!-- /.option-->
+
+                                                                </select><!-- /.select-->
+                                                            </div><!-- /.travel-select-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+
+                                                    <div class="col-lg-2 col-md-1 col-sm-4 text-center">
+
+                                                        <div class="single-tab-select-box">
+                                                            <h2>البحث بالسعر</h2>
+                                                            <h2>من</h2>
+                                                            <div class="travel-select-icon">
+                                                                <select class="form-control "  name="cost1">
+																	<option value={{false}} >اختر السعر</option>
+                                                                    <option value="1000" >1000</option><!-- /.option-->
+
+                                                                    <option value="3000" >3000</option><!-- /.option-->
+
+                                                                    <option value="5000" >5000</option><!-- /.option-->
+                                                                    <option value="7000" >7000</option><!-- /.option-->
+
+                                                                </select><!-- /.select-->
+                                                            </div><!-- /.travel-select-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+
+                                                        <div class="single-tab-select-box">
+                                                            <h2>الى</h2>
+                                                            <div class="travel-select-icon">
+                                                                <select class="form-control " name="cost2">
+																	<option value={{false}} >اختر السعر</option>
+                                                                    <option value="1000" >1000</option><!-- /.option-->
+
+                                                                    <option value="3000" >3000</option><!-- /.option-->
+
+                                                                    <option value="5000" >5000</option><!-- /.option-->
+                                                                    <option value="7000">7000</option><!-- /.option-->
+
+                                                                </select><!-- /.select-->
+                                                            </div><!-- /.travel-select-icon -->
+                                                        </div><!--/.single-tab-select-box-->
+                                                    </div><!--/.col-->
+                                                    <div class="col-sm-3 " style="margin-top:40px">
+
+                                                        <div class="single-tab-select-box">
+                                                            <div class="about-btn pull-right">
+                                                                <button  class="about-view travel-btn" type="submit">
+                                                                    search
+                                                                </button><!--/.travel-btn-->
+                                                            </div><!--/.about-btn-->
+                                                        </div><!--/.col-->
+                                                    </div>
+                                                </div><!--/.row-->
+
+
+
+                                            </form>
+
+                                        </div><!--/.tab-para-->
+
+                                    </div><!--/.tabpannel-->
+
+                                </div>
+
+                            </div><!--/.tabpannel-->
+
+                        </div><!--/.tab content-->
+                    </div><!--/.desc-tabs-->
+                </div><!--/.single-travel-box-->
+            </div><!--/.col-->
+            </div><!--/.row-->
+            </div><!--/.container-->
+
+        </section>
+        <!--/.travel-box-->
 		<section id="service" class="service">
 			<div class="container">
 
@@ -55,12 +210,13 @@
 								<img src="assets/images/service/s1.png" alt="service-icon" />
 							</div><!--/.service-img-->
 							<div class="service-content">
-								<h2>
+							<h2>
 									<a href="#">
-									amazing tour packages
+										رحلات ترفيهية 
 									</a>
 								</h2>
-								<p>Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.</p>
+								<p>اجمل الرحلات الى شرم الشيخ و الغردقة </p>
+								
 							</div><!--/.service-content-->
 						</div><!--/.single-service-box-->
 					</div><!--/.col-->
@@ -73,10 +229,10 @@
 							<div class="service-content">
 								<h2>
 									<a href="#">
-										book top class hotel
+									رحلات اثارية
 									</a>
 								</h2>
-								<p>Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.</p>
+								<p>تعرف على الحضارة الفرعونية.</p>
 							</div><!--/.service-content-->
 						</div><!--/.single-service-box-->
 					</div><!--/.col-->
@@ -90,10 +246,10 @@
 
 								<h2>
 									<a href="#">
-										online flight booking
+										رحلات سياحة دينية
 									</a>
 								</h2>
-								<p>Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.</p>
+								<p>رحلات الحج و العمرة </p>
 							</div><!--/.service-content-->
 						</div><!--/.single-service-box-->
 					</div><!--/.col-->
@@ -110,10 +266,10 @@
 				<div class="gallery-details">
 					<div class="gallary-header text-center">
 						<h2>
-							top destination
+							رحلات سابقة 
 						</h2>
 						<p>
-							Duis aute irure dolor in  velit esse cillum dolore eu fugiat nulla.  
+							مختارة من اجمل صور الرحلات السابقة  
 						</p>
 					</div><!--/.gallery-header-->
 					<div class="gallery-box">
@@ -123,10 +279,10 @@
 
 						  			<div class="col-md-6">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g1.jpg" alt="portfolio image"/>
+											<img src="tourImages/7.jpeg" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													china
+													الغردقة
 												</a>
 												<p><span>20 tours</span><span>15 places</span></p>
 											</div><!-- /.item-title -->
@@ -135,10 +291,10 @@
 
 						  			<div class="col-md-6">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g2.jpg" alt="portfolio image"/>
+											<img src="tourImages/10.jpeg" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													venuzuala
+													الاقصر
 												</a>
 												<p><span>12 tours</span><span>9 places</span></p>
 											</div> <!-- /.item-title-->
@@ -147,10 +303,10 @@
 
 						  			<div class="col-md-4">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g3.jpg" alt="portfolio image"/>
+											<img src="tourImages/Ain-sho7na.png" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													brazil
+													دهب
 												</a>
 												<p><span>25 tours</span><span>10 places</span></p>
 											</div><!-- /.item-title -->
@@ -159,10 +315,10 @@
 
 						  			<div class="col-md-4">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g4.jpg" alt="portfolio image"/>
+											<img src="tourImages/Ain-sho7na.png" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													australia 
+													دهب 
 												</a>
 												<p><span>18 tours</span><span>9 places</span></p>
 											</div> <!-- /.item-title-->
@@ -171,22 +327,22 @@
 
 						  			<div class="col-md-4">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g5.jpg" alt="portfolio image"/>
+											<img src="tourImages/Ain-sho7na.png" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													netharland
+													دهب
 												</a>
 												<p><span>14 tours</span><span>12 places</span></p>
 											</div> <!-- /.item-title-->
 										</div><!-- /.filtr-item -->
 						  			</div><!-- /.col -->
 
-						  			<div class="col-md-8">
+						  			<div class="col-md-12">
 						  				<div class="filtr-item">
-											<img src="assets/images/gallary/g6.jpg" alt="portfolio image"/>
+											<img src="tourImages/9.jpg" alt="portfolio image"/>
 											<div class="item-title">
 												<a href="#">
-													turkey
+													القاهرة
 												</a>
 												<p><span>14 tours</span><span>6 places</span></p>
 											</div> <!-- /.item-title-->
@@ -259,7 +415,7 @@
 					@foreach($tours as $tour)
 						<div class="col-md-4 col-sm-6">
 							<div class="single-package-item">
-								<img src="tourImages/{{$tour->images[0]->path}}" alt="package-place" style="height: 190px">
+								<img src="tourImages/{{$tour->images[0]->path}}" alt="package-place" style="height: 190px" onclick="location.href='/tourDetails/{{$tour->id}}'">
 								<div class="single-package-item-txt">
 									<h3>{{$tour->country}} <span class="pull-right">${{$tour->cost}}</span></h3>
 									<div class="packages-para">
@@ -551,7 +707,7 @@
 						<div class="col-sm-8">
 							<div class="single-special-offer">
 								<div class="single-special-offer-txt">
-									<h2>thiland</h2>
+									<h2>الغردقة</h2>
 									<div class="packages-review special-offer-review">
 										<p>
 											<i class="fa fa-star"></i>
@@ -559,37 +715,37 @@
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
-											<span>2544 review</span>
+											<span>25 review</span>
 										</p>
 									</div><!--/.packages-review-->
 									<div class="packages-para special-offer-para">
 										<p>
 											<span>
-												<i class="fa fa-angle-right"></i> 5 daays 6 nights
+												<i class="fa fa-angle-right"></i> ستة ايام و ستة ليالى
 											</span>
 											<span>
-												<i class="fa fa-angle-right"></i> 2 person
+												<i class="fa fa-angle-right"></i> فردين
 											</span>
 											<span>
-												<i class="fa fa-angle-right"></i>  5 star accomodation
+												<i class="fa fa-angle-right"></i>  اقامة 5 نجوم
 											</span>
 										</p>
 										<p>
 											<span>
-												<i class="fa fa-angle-right"></i>  transportation
+												<i class="fa fa-angle-right"></i>  مواصلات
 											</span>
 											<span>
-												<i class="fa fa-angle-right"></i>  food facilities
+												<i class="fa fa-angle-right"></i>  وجبات
 											</span>  
 										</p>
 										<p class="offer-para">
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tem ut labore et dolore magna  aliqua. Ut enim ad minim veniam, quis nostrud exercitation una <br> ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+											العرض لفترة محدودة
 										</p>
 									</div><!--/.packages-para-->
 									<div class="offer-btn-group">
 										<div class="about-btn">
 											<button  class="about-view packages-btn offfer-btn">
-												make tour
+												قم بجولتك الاولى
 											</button>
 										</div><!--/.about-btn-->
 										<div class="about-btn">
@@ -607,9 +763,9 @@
 									<img src="assets/images/offer/offer-shape.png" alt="offer-shape">
 								</div><!--/.single-special-offer-bg-->
 								<div class="single-special-shape-txt">
-									<h3>special offer</h3>
-									<h4><span>40%</span><br>off</h4>
-									<p><span>$999</span><br>reguler $ 1450</p>
+									<h3>عرض خاص</h3>
+									<h4><span>40%</span><br>خصم</h4>
+									<p><span>$999</span><br><del> $ 1450</del></p>
 								</div><!--/.single-special-shape-txt-->
 							</div><!--/.single-special-offer-->
 						</div><!--/.col-->
