@@ -68,15 +68,37 @@ class ToursController extends Controller
             'notes'  => 'nullable',
         ]);
 
-        $program_array = $request->validate([
-            'rule' => 'required',
-            
-        ]);
-
         if (!empty($id)) {
             Tour::where(array('id' => $id))->update($data);
-            Program::where(array('t_id' => $id))->update($program_array);
-            
+            // Program::where(array('t_id' => $id))->update($program_array);
+
+            $images = array();
+            if($files = $request->file('path')){
+                //    dd($files);
+                foreach($files as $image){
+                    $name =time().str_random(10).'.'.$image->getClientOriginalExtension();
+                    $image->move(public_path('tourImages'), $name);
+                    $images[] = $name;
+
+                    Gallery::create([
+                        't_id' => $id,
+                        'path' => $name
+                    ]);
+                   
+                }
+            }
+            $rules = $request->rule;
+            $rule_records = [];
+            if(!empty($rule)){
+                foreach($rules as $rule){
+                    $rule_records[] = [
+                        't_id' => $id,
+                        'rule' => $rule
+                    ] ;
+                }
+                    
+            }
+            Program::insert($rule_records);
             return Redirect::to("dashboard/tours")->withSuccess("GREAT INFO HAS BEEN UPDATED");
         } else {
             
@@ -101,7 +123,7 @@ class ToursController extends Controller
             
             $images = array();
             if($files = $request->file('path')){
-            //    dd($files);
+                //    dd($files);
                 foreach($files as $image){
                     $name =time().str_random(10).'.'.$image->getClientOriginalExtension();
                     $image->move(public_path('tourImages'), $name);
@@ -126,6 +148,20 @@ class ToursController extends Controller
         // dd($data['result']);
         return view('dashboard.tours.add-edit',$data);
 
+    }
+
+    public function updateProgram($id , Request $request){
+        // dd($id);
+        // $tour_id = $id;
+        $data['id'] = $id;
+        $data['title'] = 'EDIT PROGRAM';
+        $data['result'] = Program::where('id',$id)->first(['id','rule']);
+        // dd($data['id']);
+
+        return view('dashboard.program.add-edit',$data);
+        
+
+       
     }
 
     public function delete($id){
