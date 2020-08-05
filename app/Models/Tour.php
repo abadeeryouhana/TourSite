@@ -15,7 +15,8 @@ class Tour extends Model
         'cost',
         'transportationType',
         'notes',
-        'numberofRegisters'
+        'numberofRegisters',
+        'totalNumber'
 
         
     ];
@@ -30,5 +31,9 @@ class Tour extends Model
 
     public function customers(){
         return $this->belongsToMany(Customer::class, 'customer_tours');
+    }
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class,'t_id');
     }
 }

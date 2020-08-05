@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Tour;
+use App\Models\Gallery;
+use App\Models\Customer_tour;
 use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\tourMail;
+use Carbon\carbon;
 class TourController extends Controller
 {
     /**
@@ -184,6 +188,59 @@ class TourController extends Controller
             return \redirect()->back()->with('message', 'تم الغاء الحجز بنجاح');
 
 
+    }
+
+
+    public function getBooking($id){
+        //$users = Tour::with('galleries')->get();
+
+       $t = Tour::find($id);
+       $tour = $t->load('galleries'); 
+      // dd($tour);
+     return view('booking')->with('tour',$tour); 
+    }
+    public function booking(Request $req,$id){
+       $customer = Customer::where('email', '=', $req->email)->first();
+       if ($customer === null) {
+         $validatedData = request()->validate([
+        
+        'name' => 'required|string|max:255',
+        
+        'email' => 'required| string|email|max:255|unique:customers',
+        'country' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'street' => 'required|string|max:255',
+        
+        'phone' => 'required|numeric|min:11',
+     
+                
+        ]);
+
+        $customer= new Customer;
+        $customer->name=$req->name;
+        $customer->email=$req->email;
+        $customer->country=$req->country;
+        $customer->city=$req->city;
+        $customer->street=$req->street;
+        $customer->phone=$req->phone;
+        $customer->save();
+       }
+        $customerTour= new Customer_tour;
+        $customerTour->c_id=$customer->id;
+        $customerTour->t_id=$id;
+        $customerTour->numberOfPassengers=$req->NoOfPerson;
+        $customerTour->dateOfbooking=carbon::now();
+        $customerTour->totalCost=$req->cost * $req->NoOfPerson;
+        $customerTour->progress=0;
+        $customerTour->code=mt_rand(10000000000000, 99999999990000);
+        $customerTour->save();
+       // Mail::to($req->email)->send(new tourMail());
+        $tour = Tour::find($id);
+        $tour->increment('numberofRegisters',$req->NoOfPerson);
+        $tour->save();
+        return view('payment')->with('code',$customerTour->code)->with('totalCost',$customerTour->totalCost);
+
+        
     }
 
 }
