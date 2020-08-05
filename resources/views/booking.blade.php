@@ -129,7 +129,7 @@
 
   
     <div class="thumbnail">
-      <img src="{{asset($tour->galleries[0]->path)}}" alt="..." style="height: 220px;">
+      <img src="/tourImages/{{$tour->galleries[0]->path}}" alt="..." style="height: 220px;">
       <div class="caption">
       	<b>Tour info</b>
       	<p>country:{{$tour->name}}</p>

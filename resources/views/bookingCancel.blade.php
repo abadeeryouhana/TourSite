@@ -1,4 +1,5 @@
 @extends('master')
+@include('ajaxCancel')
 @section('container')
 
     <section id="subs" class="headerBooking subscribe">
@@ -18,21 +19,27 @@
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
+        @elseif(session('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
     @endif
 <section>
 
 
 
-        <form method="post" action="/cancel">
-            @csrf
 
-            <div class="form-group">
-                <label for="exampleDropdownFormPassword1">Your Code</label>
-                <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="code" placeholder="Code" style="width: 200px">
-            </div>
 
-            <button type="submit" class="btn btn-primary">Cancel Confirm</button>
-        </form>
+    <input type="text" class="form-control" id="exampleDropdownFormPassword1" name="code" placeholder="Code" style="width: 200px">
+
+    <button type="button" class="btn btn-primary" id="cancelBtn">Cancel Confirm</button>
+
+
+
+<div id="data">
+
+
+</div>
 
 
 

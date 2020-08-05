@@ -449,7 +449,7 @@
 										
 									</div>		
 									<div class="about-btn col-md-6">
-										<button  class="about-view packages-btn">
+										<button  class="about-view packages-btn" onclick="location.href='/book/{{$tour->id}}'">
 											book now
 										</button>	
 										

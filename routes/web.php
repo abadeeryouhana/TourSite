@@ -35,15 +35,17 @@ Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
     
 });
 
- Route::get('/book/cancel', function () {
-     return view('bookingCancel');
- });
 
-///////////////////// Index show //////////////////
+
+///////////////////// abadeer _ zeinb //////////////////
+Route::get('/book/cancel', function () {
+    return view('bookingCancel');
+});
 Route::get('/','TourController@index');
 Route::get('/tourDetails/{id}','TourController@show');
 Route::post('/search','TourController@search');
 Route::post('/cancel','TourController@cancel');
+Route::get('/cancelData','TourController@ajaxRequest');
 Route::post('/book/store/{id}','TourController@booking')->name('book.save');
 Route::get('/book/{id}','TourController@getBooking'); 
 

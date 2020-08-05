@@ -171,26 +171,57 @@ class TourController extends Controller
     public function cancel(Request $request) // Booking Cancel
     {
         // minus 1 from counter of tour //
-        $tourId = DB::table('customer_tours')->where('code', $request->code)->get();
+        //dd( $request->code);
+       // $tourId = DB::table('customer_tours')->where('code', $request->code)->get();
+        $tourId=Customer_tour::where('code','=',$request->code)->first();
 
 
-        //No validattion
-
-
-            $tour = Tour::find($tourId[0]->t_id);
+        // validattion
+        if($tourId !==null)
+        {
+            $tour = Tour::find($tourId->t_id);
 
             $tour->numberofRegisters = $tour->numberofRegisters - 1;
             $tour->save();
+
             // delete this row of booking from Customer_tours table //
-             $code=DB::table('customer_tours')->where('code',$request->code)->delete();
+            $code=DB::table('customer_tours')->where('code',$request->code)->delete();
 
 
             return \redirect()->back()->with('message', 'تم الغاء الحجز بنجاح');
+        }
+        else
+        {
+            return \redirect()->back()->with('error', 'تأكد من الكود الصحيح للحجز');
+        }
+
+
+
 
 
     }
+    public function ajaxRequest(Request $request) // show data cancelled
+    {
 
 
+        $bookCode=Customer_tour::where('code','=',$request->code)->first();
+        
+        if($bookCode !==null)
+        {
+            $customer = Customer::find($bookCode->c_id);
+         
+            $tour = Tour::find($bookCode->t_id);
+            return view('cancelData')->with('tour',$tour)->with('book',$bookCode)->with('customer',$customer);
+        }
+        elseif ($bookCode ===null)
+        {
+
+            return view('errorAjax');
+        }
+
+    }
+
+/////////////////////////////////////////
     public function getBooking($id){
         //$users = Tour::with('galleries')->get();
 

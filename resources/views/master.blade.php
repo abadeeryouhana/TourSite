@@ -98,6 +98,8 @@
 										<li>
 											<button class="book-btn">book now
 											</button>
+											<button class="book-btn" onclick="location.href='/book/cancel'">book cancel
+											</button>
 										</li><!--/.project-btn--> 
 									</ul>
 								</div><!-- /.navbar-collapse -->
