@@ -48,6 +48,19 @@
 
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-dashcube"></i> <span>Program</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    {{-- <li class=""><a href="{{ url('dashboard/tours/create ')}}"><i class="fa fa-plus"></i>ADD TOURS</a></li> --}}
+                    <li class=""><a href="{{ url('dashboard/programs') }}"><i class="fa fa-list"></i> LIST</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-dashcube"></i> <span>CUSTOMERS</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>

@@ -31,7 +31,7 @@
                 <div class="form-group col-md-6">
                   @php $input = 'name'; @endphp
                   <label for="exampleInputEmail1">NAME <span class="text-danger">*</span></label>                  
-                  <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" placeholder="ENTER NAME" value="{{ (!empty($result->name))?($result->name):('') }}" name="{{$input}}" required>
+                  <input type="text" value="{{ (!empty($result->name))?($result->name):('') }}" name="{{$input}}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" placeholder="ENTER NAME" required>
                   @if ($errors->has($input))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first($input) }}</strong>
@@ -69,15 +69,10 @@
                    
                   <div class="form-group col-md-6 ">
                     @php $input = 'startDate'; @endphp
-                    {{-- <div class="input-append date form_datetime"> --}}
                       <label for="exampleInputEmail1">START DATE <span class="text-danger">*</span></label>
-                      <input type="datetime-local" class="form-control{{ $errors->has('startDate') ? ' is-invalid' : '' }}" name="{{$input}}" size="16" value="{{ (!empty($result->startDate))?($result->startDate):('') }}" name="meeting-time">   
-                      @if ($errors->has($input))
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $errors->first($input) }}</strong>
-                          </span>
-                      @endif      
-                    {{-- </div> --}}
+                      <input class='form-control' value="{{ (!empty($result->startDate))?($result->startDate):('') }}" readonly />
+                      <input type="datetime-local"  class="form-control" name="{{$input}}" size="16" name="meeting-time">   
+                     
                     
                   </div>
                   
@@ -239,52 +234,59 @@
                 </script>
               </div>
               
-               
-              @if (!empty($result->id)) 
-                @php $images = DB::table('galleries')->where('t_id',$result->id)->get(); @endphp
-                @php $programs = DB::table('programs')->where('t_id',$result->id)->get(); @endphp
-                <div id="show-div">
-                  <div class="row">
+            
+            @if (!empty($result->id)) 
+              @php $images = DB::table('galleries')->where('t_id',$result->id)->get(); @endphp
+              @php $programs = DB::table('programs')->where('t_id',$result->id)->get(); @endphp
+              <div id="show-div">
+                <div class="row">
 
-                    <div class="form-group col-md-6">
+                  <div class="form-group col-md-6">
+                    @foreach ($programs as $value) 
+                    
                       <label for="exampleInputEmail1">PROGRAM RULE <span class="text-danger">*</span></label>                  
-                  
-                      @foreach ($programs as $value) 
-                        {{-- <img  width="330" height="200" src="{{ url('tourImages/'.$value->path) }}" > --}}
-                        <p>{{ $value->rule }}</p>
-                        <form action="{{route('dashboard/program.delete',['id' => $value->id])}}" method="POST">
-                          {{-- @csrf
-                          @method('delete') --}}
-                          <button type="submit" rel="tooltip" title="DELETED" class="btn btn-danger btn-xs" data-original-title="Delete">
-                              <i class="fa fa-trash-o"> DELETED</i>
-                          </button>
-                          
-                        </form>
-                        <hr>
-                      @endforeach
-                    </div>
+                      
+                      <input type="text" value="{{$value->rule}}" name="rule" class="form-control" id="name" >
 
+                      {{-- <p>{{ $value->rule }}</p> --}}
+                       
+                      <div class="form-group row">
+                        @php $id = $value->id; @endphp
 
-                    <div class="form-group col-md-6" style="padding-left: 30px">
-                      <label for="exampleInputEmail1">TOUR IMAGES <span class="text-danger">*</span></label>                  
-                      @foreach ($images as $value) 
-                        <img  width="330" height="200" src="{{ url('tourImages/'.$value->path) }}" >
-                        <form action="{{route('dashboard/image.delete',['id' => $value->id])}}" method="POST">
-                          @csrf
-                          @method('delete')
-                          <button type="submit" rel="tooltip" title="DELETED" class="btn btn-danger btn-xs" data-original-title="Delete">
-                              <i class="fa fa-trash-o"> DELETED</i>
-                          </button>
-                          
-                        </form>
+                        <a style="padding-bottom: 2px" href="{{ url('dashboard/program/'.$id) }}" data-toggle="tooltip" data-original-title="Edit" title="EDIT" class="btn btn-warning btn-xs">
+                          <i class="fa fa-pencil text-inverse m-r-10"> EDIT</i> 
+                        </a>
                     
-                      @endforeach
                     </div>
-              
-                    
+                        
+                      {{-- </form> --}}
+                      <hr>
+                    @endforeach
                   </div>
-                </div> 
-              @endif
+
+
+                  <div class="form-group col-md-6" style="padding-left: 30px">
+                    <label for="exampleInputEmail1">TOUR IMAGES <span class="text-danger">*</span></label>                  
+                    @foreach ($images as $value)
+                      <img  width="330" height="200" src="{{ url('tourImages/'.$value->path) }}" >
+                      <form action="{{url('dashboard/image/delete',['id' => $value->id])}}" method="POST">
+                        {{-- @csrf
+                        {{ method_field('delete')}} --}}
+                        <button type="submit" rel="tooltip" title="DELETED" class="btn btn-danger btn-xs" data-original-title="Delete">
+                            <i class="fa fa-trash-o"> DELETED</i>
+                        </button>
+                        
+                      </form>
+                  
+                    @endforeach
+                  </div>
+            
+                  
+                </div>
+              </div> 
+            @endif  
+              
+              
 
         
               <div id="show-div">
