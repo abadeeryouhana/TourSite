@@ -22,6 +22,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>ID</th>
+                                    <th>NAME TOUR</th>
                                     <th>RULE</th>
                                     <th class="">ACTION</th>
                                 </tr>
@@ -146,6 +147,7 @@
                     columns: [
                         {data: 'id', name: 'id', 'visible': false},
                         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+                        {data: 'tours', name: 'tours.name', sortable: false, searchable: false},
                         {data: 'rule', name: 'rule'},
                         {data: 'action', name: 'action', orderable: false},
                     ],

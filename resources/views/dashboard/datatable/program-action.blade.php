@@ -1,6 +1,6 @@
-<a style="padding-bottom: 2px" href="{{ url('dashboard/programs/'.$id.'/edit') }}" data-toggle="tooltip" data-original-title="Edit" title="EDIT" class="btn btn-warning btn-xs">
+{{-- <a style="padding-bottom: 2px" href="{{ url('dashboard/programs/'.$id.'/edit') }}" data-toggle="tooltip" data-original-title="Edit" title="EDIT" class="btn btn-warning btn-xs">
 	<i class="fa fa-pencil text-inverse m-r-10"> EDIT</i> 
-</a>
+</a> --}}
 
 <form action="{{ url('dashboard/programs/delete/'.$id) }}" method="POST">
     @csrf

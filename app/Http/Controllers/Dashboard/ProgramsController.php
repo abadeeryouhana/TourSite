@@ -11,14 +11,19 @@ class ProgramsController extends Controller
 {
     public function index(){
         $data['title'] = 'PROGRAMS';
+        // $query = Program::with('tours');
+        // dd($query->get());
         if(request()->ajax()){
-            return datatables()->of(Program::select([
-                'id','rule'
-            ])
-            )
+            $query = Program::with('tours');
+            return datatables()
+            ->eloquent($query)
+            ->addColumn('tours', function(Program $program){
+                return $program->tours->name;
+                
+            })
             ->addIndexColumn()
             ->addColumn('action','dashboard.datatable.program-action')
-            ->rawColumns(['status','action'])
+            ->rawColumns(['status','action','tours'])
             ->make(true);
         }
 

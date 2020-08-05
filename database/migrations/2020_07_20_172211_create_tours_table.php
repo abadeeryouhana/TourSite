@@ -23,7 +23,7 @@ class CreateToursTable extends Migration
 			$table->float('cost',8,2);
 			$table->string('transportationType');
 			$table->string('notes');
-            $table->integer('numberofRegisters');
+            $table->integer('numberofRegisters')->default(0);
             $table->integer('totalNumber');
             $table->timestamps();
         });

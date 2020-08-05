@@ -65,6 +65,8 @@ class ToursController extends Controller
             'duration'  => 'required',
             'cost'  => 'required',
             'transportationType' => 'required',
+            // 'numberofRegisters' => 'nullable',
+            'totalNumber' => 'required',
             'notes'  => 'nullable',
         ]);
 
