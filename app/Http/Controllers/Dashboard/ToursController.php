@@ -16,6 +16,7 @@ class ToursController extends Controller
 
     public function index(Request $request){
         $data['title'] = "TOURS";
+        // dd($request);
         // $query = Tour::with('programs');
         // dd($query);
         if(request()->ajax()){
@@ -71,6 +72,7 @@ class ToursController extends Controller
         ]);
 
         if (!empty($id)) {
+            // dd($request);
             Tour::where(array('id' => $id))->update($data);
             // Program::where(array('t_id' => $id))->update($program_array);
 

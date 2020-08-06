@@ -31,6 +31,7 @@
                                     <th>TRANSPORTATION TYPE</th>
                                     <th>IMAGES</th>
                                     <th>PROGRAM</th>
+                                    <th>TOTAL NUMBER</th>
                                     <th>NOTES</th>
                                     <th class="">ACTION</th>
                                 </tr>
@@ -164,7 +165,7 @@
                         {data: 'transportationType', name: 'transportationType'},
                         {data: 'path', name: 'images.path', sortable: false, searchable: false},
                         {data: 'program', name: 'programs.rule'},
-                        
+                        {data: 'totalNumber', name: 'totalNumber'},
                         {data: 'notes', name: 'notes'},
                         {data: 'action', name: 'action', orderable: false},
                     ],
