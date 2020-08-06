@@ -81,7 +81,9 @@
                   <div class="form-group col-md-6 ">
                     @php $input = 'authorization'; @endphp
                     <label for="exampleInputEmail1">SELECT USER TYPE <span class="text-danger">*</span></label>
+                    @if (!empty($result->id)) 
                     @php $id = $result->authorization; @endphp
+                    @endif
                    
                     <select name="{{ $input }}" class="form-control{{ $errors->has($input) ? ' is-invalid' : '' }}">
                       @if(empty($id))
