@@ -31,6 +31,7 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+        // dd($request->all());
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
@@ -65,8 +66,9 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        // dd($this->username());
         $request->validate([
-            $this->username() => 'required|string',
+            'username' => 'required|string',
             'password' => 'required|string',
         ]);
     }
@@ -150,7 +152,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'email';
+        return 'username';
     }
 
     /**

@@ -30,7 +30,7 @@
                 
                 <div class="form-group col-md-6">
                   @php $input = 'name'; @endphp
-                  <label for="exampleInputEmail1">NAME <span class="text-danger">*</span></label>                  
+                  <label for="">NAME <span class="text-danger">*</span></label>                  
                   <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" placeholder="ENTER NAME" value="{{ (!empty($result->name))?($result->name):('') }}" name="{{$input}}" required>
                   @if ($errors->has($input))
                     <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
 
                 <div class="form-group col-md-6 ">
                     @php $input = 'phone'; @endphp
-                    <label for="exampleInputEmail1">PHONE <span class="text-danger">*</span></label>
+                    <label for="">PHONE <span class="text-danger">*</span></label>
                     
                     <input type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" id="phone" placeholder="ENTER PHONE" value="{{ (!empty($result->phone))?($result->phone):('') }}" name="{{$input}}" required>
                     @if ($errors->has($input))
@@ -56,20 +56,20 @@
 
               {{-- <div id="show-div"> --}}
                 <div class="row">
-                    <div class="form-group col-md-6 ">
-                        @php $input = 'username'; @endphp
-                        <label for="exampleInputEmail1">USER NAME <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" id="name" placeholder="ENTER NAME" value="{{ (!empty($result->username))?($result->username):('') }}" name="{{$input}}" required>
-                        @if ($errors->has($input))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first($input) }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                  <div class="form-group col-md-6">
+                    @php $input = 'username'; @endphp
+                    <label for="">USER NAME <span class="text-danger">*</span></label>                  
+                    <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" id="name" placeholder="ENTER USER NAME" value="{{ (!empty($result->username))?($result->username):('') }}" name="{{$input}}" required>
+                    @if ($errors->has($input))
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first($input) }}</strong>
+                      </span>
+                    @endif
+                  </div>
 
                   <div class="form-group col-md-6 ">
                     @php $input = 'password'; @endphp
-                    <label for="exampleInputEmail1">PASSWORD <span class="text-danger">*</span></label>
+                    <label for="">PASSWORD <span class="text-danger">*</span></label>
                     <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" placeholder="ENTER PASSWORD" value="{{ (!empty($result->password))?($result->password):('') }}" name="{{$input}}" required>
                     @if ($errors->has($input))
                             <span class="invalid-feedback" role="alert">
@@ -86,15 +86,23 @@
                     @endif
                    
                     <select name="{{ $input }}" class="form-control{{ $errors->has($input) ? ' is-invalid' : '' }}">
-                      @if(empty($id))
+                      @if(!empty($id))
                       {{-- @php dd('asd'); @endphp --}}
+                        @if(isset($id) == '0')
+                          <option  value="">ADMIN</option>
+                        @else  
+                          <option  value="">USER</option>
+                        @endif  
+
                         <option  value="0" {{ isset($row) && $row[$input] == '0' ? 'selected' : ''}}>ADMIN</option>
                         <option  value="1" {{ isset($row) && $row[$input] == '1' ? 'selected' : ''}}>USER</option>
                       @else
+                        
                         <option  value="">SELECT USER TYPE</option>
-                      @endif
                         <option value="0" {{ isset($row) && $row[$input] == '0' ? 'selected' : ''}}>Admin</option>
                         <option value="1" {{ isset($row) && $row[$input] == '1' ? 'selected' : ''}}>User</option>
+                      @endif
+                        
                      
                     </select>
                     @if ($errors->has($input))

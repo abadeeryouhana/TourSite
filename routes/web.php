@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
+// Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
+Route::namespace('Dashboard')->prefix('dashboard')->middleware('admin')->group(function(){
 
     Route::get('home','HomeController@index');
     
