@@ -79,7 +79,7 @@
 								</a>
 							</div><!-- /.logo-->
 						</div><!-- /.col-->
-						<div class="col-sm-10">
+					<div class="col-sm-10">
 							<div class="main-menu">
 							
 								<!-- Brand and toggle get grouped for better mobile display -->
