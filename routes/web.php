@@ -36,12 +36,12 @@ Route::namespace('Dashboard')->prefix('dashboard')->middleware('admin')->group(f
     
 });
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
  Route::get('/book/cancel', function () {
      return view('bookingCancel');
  });
 =======
->>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
+// >>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
 
 ///////////////////// abadeer _ zeinb //////////////////
@@ -52,7 +52,7 @@ Route::get('/','TourController@index');
 Route::get('/tourDetails/{id}','TourController@show');
 Route::post('/search','TourController@search');
 Route::post('/cancel','TourController@cancel');
-<<<<<<< HEAD
+// <<<<<<< HEAD
 
 //book and pay
 Route::post('/book/store/{id}','paymentController@booking')->name('book.save');;
@@ -65,9 +65,8 @@ Route::get('/paypal/checkout-cancel','paymentController@checkoutCancel')->name('
 Route::get('/paypal/checkout-error/{err?}','paymentController@getCheckoutError')->name('paypal.error'); 
 =======
 Route::get('/cancelData','TourController@ajaxRequest');
-Route::post('/book/store/{id}','TourController@booking')->name('book.save');
-Route::get('/book/{id}','TourController@getBooking'); 
->>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
+
+// >>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
 
 ////////////////////////////////
