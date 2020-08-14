@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
+// Route::namespace('Backend')->prefix('dashboard')->middleware('admin')->group(function(){
+Route::namespace('Dashboard')->prefix('dashboard')->middleware('admin')->group(function(){
 
     Route::get('home','HomeController@index');
     
@@ -22,8 +23,11 @@ Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
     Route::resource('tours','ToursController')->except(['show','delete']);
     Route::delete('tours/delete/{id}','ToursController@delete')->name('dashboard/tours.delete');
 
+    Route::resource('programs','ProgramsController')->except(['show','delete']);
+    Route::delete('programs/delete/{id}','ProgramsController@delete')->name('dashboard/tours.delete');
+
     Route::delete('image/delete/{id}','ToursController@deleteImage')->name('dashboard/image.delete');
-    Route::delete('program/delete/{id}','ToursController@deleteProgram')->name('dashboard/program.delete');
+    Route::get('program/{id}','ToursController@updateProgram')->name('dashboard/program.update');
 
 
     Route::resource('customers','CustomersController')->except(['show','delete']);
@@ -32,15 +36,23 @@ Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
     
 });
 
+<<<<<<< HEAD
  Route::get('/book/cancel', function () {
      return view('bookingCancel');
  });
+=======
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
-///////////////////// Index show //////////////////
+
+///////////////////// abadeer _ zeinb //////////////////
+Route::get('/book/cancel', function () {
+    return view('bookingCancel');
+});
 Route::get('/','TourController@index');
 Route::get('/tourDetails/{id}','TourController@show');
 Route::post('/search','TourController@search');
 Route::post('/cancel','TourController@cancel');
+<<<<<<< HEAD
 
 //book and pay
 Route::post('/book/store/{id}','paymentController@booking')->name('book.save');;
@@ -51,6 +63,11 @@ Route::get('/paypal/payment','paymentController@makepay')->name('paypal.pay');
 Route::get('/paypal/checkout-success/{name}','paymentController@getCheckoutSuccess')->name('paypal.success');
 Route::get('/paypal/checkout-cancel','paymentController@checkoutCancel')->name('paypal.cancel');
 Route::get('/paypal/checkout-error/{err?}','paymentController@getCheckoutError')->name('paypal.error'); 
+=======
+Route::get('/cancelData','TourController@ajaxRequest');
+Route::post('/book/store/{id}','TourController@booking')->name('book.save');
+Route::get('/book/{id}','TourController@getBooking'); 
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
 
 ////////////////////////////////

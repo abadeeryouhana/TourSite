@@ -171,23 +171,107 @@ class TourController extends Controller
     public function cancel(Request $request) // Booking Cancel
     {
         // minus 1 from counter of tour //
-        $tourId = DB::table('customer_tours')->where('code', $request->code)->get();
+        //dd( $request->code);
+       // $tourId = DB::table('customer_tours')->where('code', $request->code)->get();
+        $tourId=Customer_tour::where('code','=',$request->code)->first();
 
 
-        //No validattion
-
-
-            $tour = Tour::find($tourId[0]->t_id);
+        // validattion
+        if($tourId !==null)
+        {
+            $tour = Tour::find($tourId->t_id);
 
             $tour->numberofRegisters = $tour->numberofRegisters - 1;
             $tour->save();
+
             // delete this row of booking from Customer_tours table //
-             $code=DB::table('customer_tours')->where('code',$request->code)->delete();
+            $code=DB::table('customer_tours')->where('code',$request->code)->delete();
 
 
             return \redirect()->back()->with('message', 'تم الغاء الحجز بنجاح');
+        }
+        else
+        {
+            return \redirect()->back()->with('error', 'تأكد من الكود الصحيح للحجز');
+        }
 
 
+
+
+
+    }
+    public function ajaxRequest(Request $request) // show data cancelled
+    {
+
+
+        $bookCode=Customer_tour::where('code','=',$request->code)->first();
+        
+        if($bookCode !==null)
+        {
+            $customer = Customer::find($bookCode->c_id);
+         
+            $tour = Tour::find($bookCode->t_id);
+            return view('cancelData')->with('tour',$tour)->with('book',$bookCode)->with('customer',$customer);
+        }
+        elseif ($bookCode ===null)
+        {
+
+            return view('errorAjax');
+        }
+
+    }
+
+/////////////////////////////////////////
+    public function getBooking($id){
+        //$users = Tour::with('galleries')->get();
+
+       $t = Tour::find($id);
+       $tour = $t->load('galleries'); 
+      // dd($tour);
+     return view('booking')->with('tour',$tour); 
+    }
+    public function booking(Request $req,$id){
+       $customer = Customer::where('email', '=', $req->email)->first();
+       if ($customer === null) {
+         $validatedData = request()->validate([
+        
+        'name' => 'required|string|max:255',
+        
+        'email' => 'required| string|email|max:255|unique:customers',
+        'country' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'street' => 'required|string|max:255',
+        
+        'phone' => 'required|numeric|min:11',
+     
+                
+        ]);
+
+        $customer= new Customer;
+        $customer->name=$req->name;
+        $customer->email=$req->email;
+        $customer->country=$req->country;
+        $customer->city=$req->city;
+        $customer->street=$req->street;
+        $customer->phone=$req->phone;
+        $customer->save();
+       }
+        $customerTour= new Customer_tour;
+        $customerTour->c_id=$customer->id;
+        $customerTour->t_id=$id;
+        $customerTour->numberOfPassengers=$req->NoOfPerson;
+        $customerTour->dateOfbooking=carbon::now();
+        $customerTour->totalCost=$req->cost * $req->NoOfPerson;
+        $customerTour->progress=0;
+        $customerTour->code=mt_rand(10000000000000, 99999999990000);
+        $customerTour->save();
+       // Mail::to($req->email)->send(new tourMail());
+        $tour = Tour::find($id);
+        $tour->increment('numberofRegisters',$req->NoOfPerson);
+        $tour->save();
+        return view('payment')->with('code',$customerTour->code)->with('totalCost',$customerTour->totalCost);
+
+        
     }
 
 

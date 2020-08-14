@@ -31,7 +31,8 @@
             </div><!--/.about-us-content-->
         </div><!--/.container-->
 
-    </section><!--/.about-us-->
+    </section>
+    <!--/.about-us-->
     <!--about-us end -->
 
     <!--travel-box start-->

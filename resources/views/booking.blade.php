@@ -210,6 +210,7 @@
 				<div class="col-md-8  left" >
 					<div class="panel panel-default" style="background-color: #F7F7F7;">
   <div class="panel-body">
+<<<<<<< HEAD
   @if (session('failed'))
                             <div class="alert alert-danger">
                              {{ session('failed') }}
@@ -220,16 +221,27 @@
          <div class="alert alert-danger" role="alert">{{ $error }}</div>
      @endforeach
 				<form  id="chechout">
+=======
+  	@foreach ($errors->all() as $error)
+         <div class="alert alert-danger" role="alert">{{ $error }}</div>
+     @endforeach
+				<form  method="POST" action="{{route('book.save',$tour->id)}}">
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 					@csrf
 					<div class="form-group">
 						<div class="form-group col-md-6 regLabel">
 							<label for="labelNameTitle">Name</label>
+<<<<<<< HEAD
 							<input type="text" name="name"   class="form-control" id="name">
+=======
+							<input type="text" name="name" required  class="form-control">
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 							
 							
 						</div>
 						<div class="form-group col-md-6 regLabel">
 							<label for="inputPassword4">phone</label>
+<<<<<<< HEAD
 							<input type="tel" name="phone"   class="form-control" id="phone">
 							
 					    </div>
@@ -275,10 +287,54 @@
 						<div class="form-group col-md-6">
 							<label for="email">Email</label>
 						    <input type="email" name="email"  class="form-control" id="email">
+=======
+							<input type="tel" name="phone" required  class="form-control">
+							
+					    </div>
+					</div>
+					<div class="form-group  regLabel">
+
+						<div class="form-group col-md-6">
+							<label for="country">Country</label>
+						    <input type="text" name="country" required class="form-control">
 							<!-- <div class="alert alert-info" role="alert">
 								4
 							</div> -->
 						</div>
+						<div class="form-group col-md-6">
+							<label for="city">City</label>
+							<input type="text" name="city" required class="form-control" >
+							<!-- <div class="alert alert-info" role="alert">
+								4
+							</div> -->
+						</div>
+					</div>
+					<div class="form-group col-md-12 regLabel">
+						<label for="street">Street</label>
+						<input type="text" name="street" required  class="form-control">
+						<!-- <div class="alert alert-info" role="alert">
+							15 saad st assiut - egypt
+						</div> -->
+				    </div>
+					
+					<div class="form-group  regLabel">
+
+						<div class="form-group col-md-6">
+							<label for="email">Email</label>
+						    <input type="email" name="email" required class="form-control">
+							<!-- <div class="alert alert-info" role="alert">
+								4
+							</div> -->
+						</div>
+						<div class="form-group col-md-6">
+							<label for="inputCity">Number of Persons</label>
+							<input type="Number" name="NoOfPerson" required class="form-control" min="1" max="{{$tour->totalNumber - $tour->numberofRegisters}}" onchange="NoOfPersonFunction(this)" id="NoOfPerson">
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
+							<!-- <div class="alert alert-info" role="alert">
+								4
+							</div> -->
+						</div>
+<<<<<<< HEAD
 						<div class="form-group col-md-6">
 							<label for="inputCity">Number of Persons</label>
 							<input type="Number" name="NoOfPerson"  class="form-control" min="1" max="{{$tour->totalNumber - $tour->numberofRegisters}}" onchange="NoOfPersonFunction(this)" id="NoOfPerson">
@@ -286,6 +342,8 @@
 								4
 							</div> -->
 						</div>
+=======
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 					</div>
 					
 				<input type="hidden" name="cost" value="{{$tour->cost}}">
@@ -313,7 +371,11 @@
 
   
     <div class="thumbnail">
+<<<<<<< HEAD
       <img src="{{asset($tour->galleries[0]->path)}}" alt="..." style="height: 220px;">
+=======
+      <img src="/tourImages/{{$tour->galleries[0]->path}}" alt="..." style="height: 220px;">
+>>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
       <div class="caption">
       	<b>Tour info</b>
       	<p>country:{{$tour->name}}</p>

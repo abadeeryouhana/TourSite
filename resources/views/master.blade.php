@@ -70,7 +70,7 @@
 		<!-- main-menu Start -->
 		<header class="top-area">
 			<div class="header-area">
-				<div class="container">
+				<div class="container-fluid">
 					<div class="row">
 						<div class="col-sm-2">
 							<div class="logo">
@@ -94,10 +94,19 @@
 										<li class="smooth-menu"><a href="#gallery">Destination</a></li>
 										<li class="smooth-menu"><a href="#pack">Packages </a></li>
 										<li class="smooth-menu"><a href="#spo">Special Offers</a></li>
-										<li class="smooth-menu"><a href="#blog">blog</a></li>
-										<li class="smooth-menu"><a href="#subs">subscription</a></li>
+										<li class="smooth-menu"><a href="#blog">Blog</a></li>
+										<li class="smooth-menu"><a href="#subs">Subscription</a></li>
+										{{-- <li class="smooth-menu"><a href="{{route('login')}}">Login</a></li> --}}
+										@guest
+											<li><a href="{{route('login')}}">Login</a></li>
+										@else
+
+											<li><a href="{{url('/dashboard/home')}}">Dashboard </a></li>
+										@endguest
 										<li>
 											<button class="book-btn">book now
+											</button>
+											<button class="book-btn" onclick="location.href='/book/cancel'">book cancel
 											</button>
 										</li><!--/.project-btn--> 
 									</ul>

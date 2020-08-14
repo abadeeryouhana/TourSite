@@ -10,29 +10,20 @@
             <div class="col-xs-12">
             <div class="box box-primary box-solid">
                     <div class="box-header box-header-background with-border">
-                        <h3 class="box-title">TOUR LIST</h3>
+                        <h3 class="box-title">PROGRAM LIST</h3>
                         <div class="box-tools pull-right">
-                            <a href="{{ url('dashboard/tours/create ')}}" class="btn btn-warning" style="padding-bottom: 3px;"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD NEW</a>
+                            {{-- <a href="{{ url('dashboard/programs/create ')}}" class="btn btn-warning" style="padding-bottom: 3px;"> <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; ADD NEW</a> --}}
                         </div>
                     </div>
 
                     <div class="box-body table-responsive">
-                        <table id="tour_table" class="table table-bordered table-hover">
+                        <table id="program_table" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>COUNTRY</th>
-                                    <th>CITY</th>
-                                    <th>START DATE</th>
-                                    <th>DURATION</th>
-                                    <th>COST</th>
-                                    <th>TRANSPORTATION TYPE</th>
-                                    <th>IMAGES</th>
-                                    <th>PROGRAM</th>
-                                    <th>TOTAL NUMBER</th>
-                                    <th>NOTES</th>
+                                    <th>NAME TOUR</th>
+                                    <th>RULE</th>
                                     <th class="">ACTION</th>
                                 </tr>
                             </thead>
@@ -67,8 +58,8 @@
 
         //$(window).bind("load", function() {
 
-            if ($('#tour_table').length > 0) {
-            var tableData = $('#tour_table').DataTable({
+            if ($('#program_table').length > 0) {
+            var tableData = $('#program_table').DataTable({
                     //stateSave: true,
 
                     processing: true,
@@ -92,7 +83,7 @@
                     lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                     dom: 'lBfrtip',
                     ajax: {
-                        url: "{{ route('tours.index') }}",
+                        url: "{{ route('programs.index') }}",
                         type: 'GET',
                         data: function (d) {
                         }
@@ -110,7 +101,7 @@
                         });
                         $('body').off('click', '[id^="changeStatus-"]').on('click', '[id^="changeStatus-"]', function (e) {
                             var self = $(this);
-                            var tbl = "<?php echo 'tours' ?>";
+                            var tbl = "<?php echo 'programs' ?>";
                             var id = $(this).attr('id').split('-')[1];
                             var status = $(this).attr('id').split('-')[2];
                             // var language = "<?php echo Session::get('lang') ?>";
@@ -156,17 +147,8 @@
                     columns: [
                         {data: 'id', name: 'id', 'visible': false},
                         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                        {data: 'name', name: 'name'},
-                        {data: 'country', name: 'country'},
-                        {data: 'city', name: 'city'},
-                        {data: 'startDate', name: 'startDate'},
-                        {data: 'duration', name: 'duration'},
-                        {data: 'cost', name: 'cost'},
-                        {data: 'transportationType', name: 'transportationType'},
-                        {data: 'path', name: 'images.path', sortable: false, searchable: false},
-                        {data: 'program', name: 'programs.rule'},
-                        {data: 'totalNumber', name: 'totalNumber'},
-                        {data: 'notes', name: 'notes'},
+                        {data: 'tours', name: 'tours.name', sortable: false, searchable: false},
+                        {data: 'rule', name: 'rule'},
                         {data: 'action', name: 'action', orderable: false},
                     ],
                     order: [[0, 'desc']]

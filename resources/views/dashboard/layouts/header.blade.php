@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('/dashboard') }}" class="logo">
+    <a href="{{ url('/dashboard/home') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
 
         <span class="logo-mini"><b>
@@ -24,41 +24,20 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{-- @if (!empty(auth()->user()->avatar)) --}}
-                            {{-- <img src="{{ asset(''.auth()->user()->avatar) }}"  class="user-image" alt="User Image"/> --}}
-                            {{-- @else
-                            <?php $NoImage = asset('theme/no_image.png'); ?>
-                            <img src="{{ url($NoImage) }}" class="user-image" alt="User Image">
-                            @endif --}}
+                       
 
-                        {{-- <span class="hidden-xs">{{ auth()->user()->name }}</span> --}}
+                        <span class="hidden-xs">{{ auth()->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                          {{-- @if (!empty(auth()->user()->avatar)) --}}
-                            {{-- <img src="{{ asset(''.auth()->user()->avatar) }}" class="img-circle" alt="User Image"/> --}}
-                            {{-- @else --}}
-                            {{-- <img src="{{ url($NoImage) }}" class="img-circle" alt="User Image">
-                            @endif --}}
-                            <p>
-                                {{-- {{ auth()->user()->name }}
-                                <small>{{ auth()->user()->email }}</small> --}}
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        
-
-                        <!-- Menu Footer-->
                         <li class="user-footer" style="background-color: #12113e !important;">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">{{ __('message.PROFILE') }}</a>
+                                <a href="{{url('/')}}" class="btn btn-default btn-flat">WEBSITE</a>
                             </div>
                             <div class="pull-right">
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('message.SIGN_OUT') }}</a>
+                                <a href="{{ url('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();document.getElementById('logout-form').submit();">LOGOUT</a>
                             </div>
                         </li>
                     </ul>
