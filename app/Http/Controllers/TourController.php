@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\tourMail;
 use Carbon\carbon;
+use PDF;
 class TourController extends Controller
 {
     /**
@@ -222,6 +223,48 @@ class TourController extends Controller
     }
 
 /////////////////////////////////////////
+ /////////////////////////////// PDF Ticket ///////////////
+ public function show_ticket($code)
+ {
+     $bookCode=Customer_tour::where('code','=',$code)->first();
+     
+         $customer = Customer::find($bookCode->c_id);
+      
+         $tour = Tour::find($bookCode->t_id);
+         return view('TicketPdf')->with('tour',$tour)->with('book',$bookCode)->with('customer',$customer);
+ 
+ }
+
+ function show_pdf($code)
+ {
+ 
+  $book=Customer_tour::where('code','=',$code)->first();
+     
+  $customer = Customer::find($book->c_id);
+
+  $tour = Tour::find($book->t_id);
+
+  $pdf = PDF::loadView('pdf', compact('tour','book','customer'))->setOptions([ 'defaultFont' => 'sans-serif']);
+
+  return $pdf->stream('ticket.pdf');
+ }
+
+ function download_pdf($code)
+ {
+ 
+  $book=Customer_tour::where('code','=',$code)->first();
+     
+  $customer = Customer::find($book->c_id);
+
+  $tour = Tour::find($book->t_id);
+
+  $pdf = PDF::loadView('pdf', compact('tour','book','customer'))->setOptions([ 'defaultFont' => 'sans-serif']);
+     
+  return $pdf->download('ticket.pdf');
+  
+ }
+
+/////////////////////////////////////////////////////
     public function getBooking($id){
         //$users = Tour::with('galleries')->get();
 

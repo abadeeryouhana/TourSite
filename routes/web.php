@@ -40,7 +40,7 @@ Route::namespace('Dashboard')->prefix('dashboard')->middleware('admin')->group(f
  Route::get('/book/cancel', function () {
      return view('bookingCancel');
  });
-=======
+
 // >>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
 
@@ -63,14 +63,17 @@ Route::get('/paypal/payment','paymentController@makepay')->name('paypal.pay');
 Route::get('/paypal/checkout-success/{name}','paymentController@getCheckoutSuccess')->name('paypal.success');
 Route::get('/paypal/checkout-cancel','paymentController@checkoutCancel')->name('paypal.cancel');
 Route::get('/paypal/checkout-error/{err?}','paymentController@getCheckoutError')->name('paypal.error'); 
-=======
+
 Route::get('/cancelData','TourController@ajaxRequest');
 
 // >>>>>>> 6501441551ff466b17664ea005ef84dc56ae8594
 
 
 ////////////////////////////////
-
+///////////// TO PDF Route ///////////
+Route::get('/ticket/{code}','TourController@show_ticket');
+Route::post('/ticket/download/pdf/{code}','TourController@download_pdf');
+Route::post('/ticket/show/pdf/{code}','TourController@show_pdf');
 
 Auth::routes();
 
