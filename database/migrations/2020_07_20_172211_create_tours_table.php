@@ -24,6 +24,7 @@ class CreateToursTable extends Migration
 			$table->string('transportationType');
 			$table->string('notes');
             $table->integer('numberofRegisters');
+            $table->integer('totalNumber');
             $table->timestamps();
         });
     }

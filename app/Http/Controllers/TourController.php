@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Tour;
+use App\Models\Gallery;
+use App\Models\Customer_tour;
 use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\tourMail;
+use Carbon\carbon;
 class TourController extends Controller
 {
     /**
@@ -185,5 +189,9 @@ class TourController extends Controller
 
 
     }
+
+
+    
+   
 
 }

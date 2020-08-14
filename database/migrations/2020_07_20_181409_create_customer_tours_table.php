@@ -20,7 +20,7 @@ class CreateCustomerToursTable extends Migration
             $table->dateTime('dateOfbooking');
             $table->float('totalCost');
             $table->tinyInteger('progress');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->foreign('c_id')->references('id')->on('customers');
             $table->foreign('t_id')->references('id')->on('tours');
             $table->timestamps();

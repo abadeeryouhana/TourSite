@@ -32,7 +32,7 @@ Route::namespace('Dashboard')->prefix('dashboard')->group(function(){
     
 });
 
- Route::get('/book', function () {
+ Route::get('/book/cancel', function () {
      return view('bookingCancel');
  });
 
@@ -41,9 +41,18 @@ Route::get('/','TourController@index');
 Route::get('/tourDetails/{id}','TourController@show');
 Route::post('/search','TourController@search');
 Route::post('/cancel','TourController@cancel');
-Route::get('/book', function () {
-    return view('bookingCancel'); // for showing Cancel Page
-});
+
+//book and pay
+Route::post('/book/store/{id}','paymentController@booking')->name('book.save');;
+Route::get('/book/{id}','paymentController@getBooking');
+
+Route::get('/paypal/payment','paymentController@makepay')->name('paypal.pay');
+
+Route::get('/paypal/checkout-success/{name}','paymentController@getCheckoutSuccess')->name('paypal.success');
+Route::get('/paypal/checkout-cancel','paymentController@checkoutCancel')->name('paypal.cancel');
+Route::get('/paypal/checkout-error/{err?}','paymentController@getCheckoutError')->name('paypal.error'); 
+
+
 ////////////////////////////////
 
 
